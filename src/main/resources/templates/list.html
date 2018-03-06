@@ -1,10 +1,78 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>List of ING ATMs in Netherlands</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet"/>
+		<link href="css/datatables.min.css" rel="stylesheet" />
+	</head>
+	<body>
+	<h1 class="display-4 ml-4">ING ATM List</h1>
+		<div class="container mt-3">
+			<div class="form-row mb-3">
+				<div class="col-9">
+					<input type="text" id="inputSearch" class="form-control"
+						placeholder="City name"/>
+				</div>
+				<div class="col-3">
+					<button class="btn btn-secondary" type="submit"
+						onclick="loadTable()">Search</button>	
+				</div>
+			</div>
+	
+			<div class="form-row mt-3">
+				<table id="example" class="table table-bordered table-striped">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Street</th>
+							<th scope="col">House Number</th>
+							<th scope="col">Postal Code</th>
+							<th scope="col">City</th>
+							<th scope="col">Latitude</th>
+							<th scope="col">Longitude</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</body>
 
-</body>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/datatables.min.js"></script>
+	<script>
+		function loadTable() {
+			var url = "atms";
+			var city = $("#inputSearch").val();
+
+			if (city)
+				url = url + "?city=" + city
+
+			$('#example').DataTable({
+				"ajax" : {
+					"url" : url,
+					"dataSrc" : ""
+				},
+				"columns" : [ {
+					"data" : "address.street"
+				}, {
+					"data" : "address.housenumber"
+				}, {
+					"data" : "address.postalcode"
+				}, {
+					"data" : "address.city"
+				}, {
+					"data" : "address.geoLocation.lat"
+				}, {
+					"data" : "address.geoLocation.lng"
+				} ],
+				"paging" : false,
+				"ordering" : false,
+				"deferRender" : true,
+				"destroy" : true,
+				"searching" : false
+			});
+		}
+
+	</script>
 </html>

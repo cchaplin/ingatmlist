@@ -21,8 +21,7 @@ public class ATMController {
 	}
 	
 	@GetMapping("/atms")
-	public List<ATM> retrieveAtmList(@RequestParam(required=false) String city) {
-		System.out.println("Nav: City is ["+city+"]");
+	public List<ATM> retrieveAtmList(@RequestParam(required=false) String city){
 		if (null == city || city.isEmpty())
 			return atmDAO.listAllAtm();
 		return atmDAO.listAtmByCity(city);

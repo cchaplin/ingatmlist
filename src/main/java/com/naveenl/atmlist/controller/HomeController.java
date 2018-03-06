@@ -8,7 +8,7 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String viewHome() {
-		return "index";
+		return "list";
 	}
 	
 	@RequestMapping("/list")
